@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useKV } from '@github/spark/hooks'
 import { Gear, CloudArrowDown, Question } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
@@ -26,9 +26,15 @@ function App() {
       contentfulService.configure(config)
       testConnection()
     }
+  }, [config, testConnection])
+
+  useEffect(() => {
+    if (!config) {
+      setStatus('disconnected')
+    }
   }, [config])
 
-  const testConnection = async () => {
+  const testConnection = useCallback(async () => {
     setStatus('loading')
     setErrorMessage('')
     const result = await contentfulService.testConnection()
@@ -42,7 +48,7 @@ function App() {
         description: result.error,
       })
     }
-  }
+  }, [])
 
   const handleSaveConfig = (newConfig: ContentfulConfig) => {
     setConfig(newConfig)
