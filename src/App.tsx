@@ -50,10 +50,10 @@ function App() {
     }
   }, [config])
 
-  const handleSaveConfig = (newConfig: ContentfulConfig) => {
+  const handleSaveConfig = useCallback((newConfig: ContentfulConfig) => {
     setConfig(newConfig)
     toast.success('Configuration saved')
-  }
+  }, [setConfig])
 
   const fetchContent = async () => {
     if (!config) {
