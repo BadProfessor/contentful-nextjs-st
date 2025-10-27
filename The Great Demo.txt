@@ -1,0 +1,23 @@
+The Great Demo:
+
+Tell - Show - Tell
+
+Introduce - Demo - Summarize
+
+INTRO:
+What is the biggest stumbling block of implementing a headless CMS?
+Developers?
+How much does a developer cost?
+100k+ at least
+How could we engineer without a developer?
+Agentic AI
+
+DEMO:
+GitHub Spark
+
+SUMMARY:
+With Agentic AI we can bridge the gaps in our POCs, be faster to market, creating value for our customers.
+
+5 concise slides
+5 critical tabs
+
