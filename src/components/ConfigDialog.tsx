@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useKV } from '@github/spark/hooks'
 import {
   Dialog,
@@ -23,9 +23,17 @@ interface ConfigDialogProps {
 
 export function ConfigDialog({ open, onOpenChange, onSave }: ConfigDialogProps) {
   const [config] = useKV<ContentfulConfig | null>('contentful-config', null)
-  const [spaceId, setSpaceId] = useState(config?.spaceId || '')
-  const [accessToken, setAccessToken] = useState(config?.accessToken || '')
-  const [environment, setEnvironment] = useState(config?.environment || 'master')
+  const [spaceId, setSpaceId] = useState('')
+  const [accessToken, setAccessToken] = useState('')
+  const [environment, setEnvironment] = useState('master')
+
+  useEffect(() => {
+    if (config) {
+      setSpaceId(config.spaceId || '')
+      setAccessToken(config.accessToken || '')
+      setEnvironment(config.environment || 'master')
+    }
+  }, [config, open])
 
   const handleSave = () => {
     if (!spaceId || !accessToken) return
