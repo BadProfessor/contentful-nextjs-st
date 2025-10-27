@@ -21,19 +21,6 @@ function App() {
   const [setupDialogOpen, setSetupDialogOpen] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string>('')
 
-  useEffect(() => {
-    if (config) {
-      contentfulService.configure(config)
-      testConnection()
-    }
-  }, [config, testConnection])
-
-  useEffect(() => {
-    if (!config) {
-      setStatus('disconnected')
-    }
-  }, [config])
-
   const testConnection = useCallback(async () => {
     setStatus('loading')
     setErrorMessage('')
@@ -49,6 +36,19 @@ function App() {
       })
     }
   }, [])
+
+  useEffect(() => {
+    if (config) {
+      contentfulService.configure(config)
+      testConnection()
+    }
+  }, [config, testConnection])
+
+  useEffect(() => {
+    if (!config) {
+      setStatus('disconnected')
+    }
+  }, [config])
 
   const handleSaveConfig = (newConfig: ContentfulConfig) => {
     setConfig(newConfig)
